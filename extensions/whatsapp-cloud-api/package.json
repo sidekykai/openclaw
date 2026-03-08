@@ -1,0 +1,28 @@
+{
+  "name": "@openclaw/whatsapp-cloud-api",
+  "version": "2026.2.27",
+  "description": "WhatsApp Cloud API channel plugin for OpenClaw",
+  "type": "module",
+  "dependencies": {
+    "zod": "^4.3.6"
+  },
+  "openclaw": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "channel": {
+      "id": "whatsapp-cloud-api",
+      "label": "WhatsApp Cloud API",
+      "selectionLabel": "WhatsApp Cloud API (Meta)",
+      "docsPath": "/channels/whatsapp-cloud-api",
+      "docsLabel": "whatsapp-cloud-api",
+      "blurb": "Connect WhatsApp Business via the Meta Cloud API with full agent capabilities.",
+      "order": 15
+    },
+    "install": {
+      "npmSpec": "@openclaw/whatsapp-cloud-api",
+      "localPath": "extensions/whatsapp-cloud-api",
+      "defaultChoice": "npm"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "whatsapp-cloud-api",
+  "channels": ["whatsapp-cloud-api"],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}
