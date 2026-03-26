@@ -3919,6 +3919,43 @@ export const GENERATED_BUNDLED_PLUGIN_METADATA = [
     },
   },
   {
+    dirName: "whatsapp-cloud-api",
+    idHint: "whatsapp-cloud-api",
+    source: {
+      source: "./index.ts",
+      built: "index.js",
+    },
+    packageName: "@openclaw/whatsapp-cloud-api",
+    packageVersion: "2026.2.27",
+    packageDescription: "WhatsApp Cloud API channel plugin for OpenClaw",
+    packageManifest: {
+      extensions: ["./index.ts"],
+      channel: {
+        id: "whatsapp-cloud-api",
+        label: "WhatsApp Cloud API",
+        selectionLabel: "WhatsApp Cloud API (Meta)",
+        docsPath: "/channels/whatsapp-cloud-api",
+        docsLabel: "whatsapp-cloud-api",
+        blurb: "Connect WhatsApp Business via the Meta Cloud API with full agent capabilities.",
+        order: 15,
+      },
+      install: {
+        npmSpec: "@openclaw/whatsapp-cloud-api",
+        localPath: "extensions/whatsapp-cloud-api",
+        defaultChoice: "npm",
+      },
+    },
+    manifest: {
+      id: "whatsapp-cloud-api",
+      configSchema: {
+        type: "object",
+        additionalProperties: false,
+        properties: {},
+      },
+      channels: ["whatsapp-cloud-api"],
+    },
+  },
+  {
     dirName: "xai",
     idHint: "xai-plugin",
     source: {

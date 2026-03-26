@@ -7,9 +7,9 @@
 import {
   DEFAULT_ACCOUNT_ID,
   setAccountEnabledInConfigSection,
-  registerPluginHttpRoute,
   buildChannelConfigSchema,
-} from "openclaw/plugin-sdk";
+} from "openclaw/plugin-sdk/core";
+import { registerPluginHttpRoute } from "openclaw/plugin-sdk/webhook-ingress";
 import { z } from "zod";
 import { listAccountIds, resolveAccount } from "./accounts.js";
 import { sendTextMessage } from "./api-client.js";
@@ -172,8 +172,8 @@ export function createWhatsAppCloudApiPlugin() {
       deliveryMode: "gateway" as const,
       textChunkLimit: 4096,
 
-      sendText: async ({ to, text, accountId, account: ctxAccount }: any) => {
-        const account: ResolvedWaCloudAccount = ctxAccount ?? resolveAccount({}, accountId);
+      sendText: async ({ to, text, accountId, cfg, account: ctxAccount }: any) => {
+        const account: ResolvedWaCloudAccount = ctxAccount ?? resolveAccount(cfg ?? {}, accountId);
 
         if (!account.accessToken || !account.phoneNumberId) {
           throw new Error(
@@ -198,9 +198,9 @@ export function createWhatsAppCloudApiPlugin() {
         };
       },
 
-      sendMedia: async ({ to, text, accountId, account: ctxAccount }: any) => {
+      sendMedia: async ({ to, text, accountId, cfg, account: ctxAccount }: any) => {
         // Media not yet supported — send caption as text fallback.
-        const account: ResolvedWaCloudAccount = ctxAccount ?? resolveAccount({}, accountId);
+        const account: ResolvedWaCloudAccount = ctxAccount ?? resolveAccount(cfg ?? {}, accountId);
         if (!account.accessToken || !account.phoneNumberId) {
           throw new Error(
             "WhatsApp Cloud API credentials not configured (accessToken or phoneNumberId missing)",

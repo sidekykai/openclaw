@@ -983,8 +983,8 @@ async function sendSubagentAnnounceDirectly(params: {
       typeof effectiveDirectOrigin?.channel === "string"
         ? effectiveDirectOrigin.channel.trim()
         : "";
-    const directChannel =
-      directChannelRaw && isDeliverableMessageChannel(directChannelRaw) ? directChannelRaw : "";
+    const isDeliverable = directChannelRaw ? isDeliverableMessageChannel(directChannelRaw) : false;
+    const directChannel = directChannelRaw && isDeliverable ? directChannelRaw : "";
     const directTo =
       typeof effectiveDirectOrigin?.to === "string" ? effectiveDirectOrigin.to.trim() : "";
     const hasDeliverableDirectTarget =
@@ -992,7 +992,10 @@ async function sendSubagentAnnounceDirectly(params: {
     const shouldDeliverExternally =
       !params.requesterIsSubagent &&
       (!params.expectsCompletionMessage || hasDeliverableDirectTarget);
-
+    // Debug: trace announce delivery resolution
+    defaultRuntime.log(
+      `[debug] Subagent announce delivery: directChannelRaw=${directChannelRaw} isDeliverable=${isDeliverable} directChannel=${directChannel} directTo=${directTo} hasDeliverableDirectTarget=${hasDeliverableDirectTarget} shouldDeliverExternally=${shouldDeliverExternally} requesterIsSubagent=${params.requesterIsSubagent}`,
+    );
     const threadId =
       effectiveDirectOrigin?.threadId != null && effectiveDirectOrigin.threadId !== ""
         ? String(effectiveDirectOrigin.threadId)
